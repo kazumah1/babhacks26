@@ -69,7 +69,7 @@ def fetch_market(slug: str) -> MarketSnapshot:
     if yes_token_id:
         hist_resp = httpx.get(
             f"{CLOB_BASE}/prices-history",
-            params={"market": yes_token_id, "interval": "1d", "fidelity": 60},
+            params={"market": yes_token_id, "interval": "max", "fidelity": 60, "startTs": 1746057600},
             timeout=15,
         )
         if hist_resp.is_success:

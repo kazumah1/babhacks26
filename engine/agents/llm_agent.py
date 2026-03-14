@@ -1,6 +1,6 @@
 import json
 from datetime import datetime
-from shared1.types import AdapterContext, TradingSignal, EntryCondition, ExitCondition
+from shared.types import AdapterContext, TradingSignal, EntryCondition, ExitCondition
 from engine.agents.base_agent import BaseAgent
 
 AGENT_PROMPT = """You are a prediction market trading agent. Output valid JSON only, no preamble.
@@ -80,6 +80,11 @@ class LLMAgent(BaseAgent):
 
         clean = raw.replace("```json", "").replace("```", "").strip()
         d = json.loads(clean)
+
+        # Normalize probabilities: some models return 0-100 instead of 0-1
+        for key in ("estimated_probability", "confidence"):
+            if d.get(key, 0) > 1:
+                d[key] = d[key] / 100.0
 
         def parse_time_limit(val):
             if val is None:

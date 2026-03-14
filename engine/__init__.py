@@ -1,4 +1,6 @@
-from shared1.types import AdapterContext, MarketSnapshot, AgentEvalResult
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+from shared.types import AdapterContext, MarketSnapshot, AgentEvalResult
 from engine.replay_engine import build_replay_state
 from engine.agents.llm_agent import LLMAgent
 from engine.agents.baseline_agent import MarketBaselineAgent
@@ -10,7 +12,7 @@ AGENTS = [
     LLMAgent("claude-sonnet", "anthropic/claude-sonnet-4-5", provider="openrouter"),
     LLMAgent("gpt-4o", "openai/gpt-4o", provider="openrouter"),
     LLMAgent("gemini-flash", "google/gemini-2.0-flash-001", provider="openrouter"),
-    LLMAgent("llama-3.3-70b", "meta-llama/llama-3.3-70b-instruct", provider="openrouter"),
+    LLMAgent("grok-3-mini", "x-ai/grok-3-mini", provider="openrouter"),
     LLMAgent("deepseek-r1", "deepseek/deepseek-r1", provider="openrouter"),
     MarketBaselineAgent(),
 ]
@@ -31,12 +33,18 @@ def run_evaluation(
     """
     replay_state = build_replay_state(context, market)
     results = []
-    for agent in AGENTS:
-        try:
-            signal = agent.trade(replay_state.context)
-            position = simulate_position(signal, replay_state)
-            result = evaluate_agent(signal, position, replay_state)
-            results.append(result)
-        except Exception as e:
-            print(f"  Agent {agent.agent_id} failed: {e}")
+
+    def _run_agent(agent):
+        signal = agent.trade(replay_state.context)
+        position = simulate_position(signal, replay_state)
+        return evaluate_agent(signal, position, replay_state)
+
+    with ThreadPoolExecutor(max_workers=len(AGENTS)) as executor:
+        futures = {executor.submit(_run_agent, agent): agent for agent in AGENTS}
+        for future in as_completed(futures):
+            agent = futures[future]
+            try:
+                results.append(future.result())
+            except Exception as e:
+                print(f"  Agent {agent.agent_id} failed: {e}")
     return results

@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from datetime import datetime
-from shared1.types import AdapterContext, MarketSnapshot, PricePoint
+from shared.types import AdapterContext, MarketSnapshot, PricePoint
 from engine.replay_engine import build_replay_state
 from engine.agents.llm_agent import LLMAgent
 from engine.position_manager import simulate_position

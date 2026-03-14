@@ -1,4 +1,4 @@
-from shared1.types import TradingSignal, SimulatedPosition
+from shared.types import TradingSignal, SimulatedPosition
 from engine.replay_engine import ReplayState
 
 

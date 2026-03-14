@@ -10,7 +10,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from datetime import datetime
-from shared1.types import AdapterContext, MarketSnapshot, PricePoint
+from shared.types import AdapterContext, MarketSnapshot, PricePoint
 from engine.replay_engine import build_replay_state
 from engine.agents.baseline_agent import MarketBaselineAgent
 

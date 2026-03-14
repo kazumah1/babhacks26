@@ -11,23 +11,21 @@ these cached files and skip any live API calls during the presentation.
 from pipeline.polymarket_client import fetch_market
 
 # ── Long-horizon markets ─────────────────────────────────────────────────────
-# Macro events, policy decisions, product launches — multi-week reasoning
+# Active markets fitting the long-horizon adapter: policy, geopolitics, macro
 LONG_HORIZON_SLUGS = [
     "will-metamask-launch-a-token-by-june-30",
-    "gustavo-petro-out-as-leader-of-colombia-by-june-30",
-    "will-fannie-maes-market-cap-be-between-300b-and-350b-at-market-close-on-ipo-day",
     "will-the-republican-party-hold-57-or-more-senate-seats-after-the-2026-midterm-elections",
-    "will-lebron-james-announce-a-presidential-run-before-2027",
+    "will-apple-be-the-largest-company-in-the-world-by-market-cap-on-december-31-291",
+    "will-russia-enter-druzkhivka-by-june-30-933-897",
+    "will-juan-carlos-pinzn-win-the-1st-round-of-the-2026-colombian-presidential-election",
 ]
 
 # ── Speech markets ────────────────────────────────────────────────────────────
-# Predicts whether a specific word/phrase will appear in a speech or event
+# Active markets fitting the speech adapter: will person say/post X
 SPEECH_SLUGS = [
-    "will-president-biden-say-folks-in-his-first-joint-address",
-    "will-president-biden-mention-coronavirus-3-or-more-times-in-his-first-joint-address",
-    "will-president-biden-mention-donald-trump-in-his-first-joint-address",
-    "will-elon-musk-mention-doge-in-his-snl-appearance",
-    "white-house-of-tweets-march-17-march-24-2026-100-119",
+    "will-jensen-huang-say-anthropic-at-the-nvidia-gtc-keynote",
+    "elon-musk-of-tweets-march-13-march-20-40-59",
+    "donald-trump-of-truth-social-posts-march-10-march-17-200plus",
 ]
 
 ALL_SLUGS = [

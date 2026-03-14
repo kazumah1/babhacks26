@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from shared1.types import AdapterContext, TradingSignal
+from shared.types import AdapterContext, TradingSignal
 
 
 class BaseAgent(ABC):

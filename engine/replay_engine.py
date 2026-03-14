@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
-from shared1.types import AdapterContext, MarketSnapshot, PricePoint
+from shared.types import AdapterContext, MarketSnapshot, PricePoint
 
 
 @dataclass
