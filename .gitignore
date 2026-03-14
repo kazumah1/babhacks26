@@ -1,0 +1,22 @@
+# Environment
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+
+# Data cache (pre-fetched markets — regenerate with prefetch script)
+data/cache/
+data/results.json
+
+# IDE
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
