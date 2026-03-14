@@ -1,3 +1,4 @@
+from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime
 
@@ -56,6 +57,7 @@ class TradingSignal:
     estimated_probability: float
     direction: str                  # "YES" | "NO" | "PASS"
     confidence: float
+    allocation: float               # dollars allocated to this trade (0 = PASS)
     entry_condition: EntryCondition
     exit_condition: ExitCondition
     hold_horizon: str               # "immediate" | "short" | "long" | "to_resolution"
@@ -93,3 +95,4 @@ class AgentEvalResult:
     market_probability: float
     final_resolution: bool | None
     rationale: str
+    allocation: float = 0.0         # dollars the agent allocated to this trade

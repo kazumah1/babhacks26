@@ -3,20 +3,26 @@ import pandas as pd
 import json
 from pathlib import Path
 
+try:
+    from streamlit_autorefresh import st_autorefresh
+    _has_autorefresh = True
+except ImportError:
+    _has_autorefresh = False
+
 # ---------------------------------------------------------------------------
 # Mock data
 # ---------------------------------------------------------------------------
 
 MOCK_RESULTS = [
-    {"agent_id":"claude-sonnet","market_id":"market-001","market_question":"Will the Fed cut rates in June 2025?","market_type":"long_horizon","brier_score":0.18,"edge_vs_market":0.12,"directional_correct":True,"simulated_pnl":0.15,"resolution_pnl":0.22,"exit_reason":"price_target","estimated_probability":0.65,"market_probability":0.53,"final_resolution":True,"rationale":"Recent CPI data showed cooling inflation. The Fed has signaled openness to cuts. Labor market softening supports the case for easing.","confidence":0.75,"direction":"YES"},
-    {"agent_id":"gpt-4o","market_id":"market-001","market_question":"Will the Fed cut rates in June 2025?","market_type":"long_horizon","brier_score":0.24,"edge_vs_market":0.04,"directional_correct":True,"simulated_pnl":0.08,"resolution_pnl":0.12,"exit_reason":"to_resolution","estimated_probability":0.57,"market_probability":0.53,"final_resolution":True,"rationale":"Inflation is moderating but the Fed may want more data before cutting.","confidence":0.55,"direction":"YES"},
-    {"agent_id":"market_baseline","market_id":"market-001","market_question":"Will the Fed cut rates in June 2025?","market_type":"long_horizon","brier_score":0.22,"edge_vs_market":0.0,"directional_correct":None,"simulated_pnl":0.0,"resolution_pnl":0.47,"exit_reason":"no_entry","estimated_probability":0.53,"market_probability":0.53,"final_resolution":True,"rationale":"Market baseline: echoes current market probability.","confidence":0.0,"direction":"PASS"},
-    {"agent_id":"claude-sonnet","market_id":"market-002","market_question":"Will Powell say 'inflation' in the next FOMC presser?","market_type":"speech","brier_score":0.09,"edge_vs_market":0.18,"directional_correct":True,"simulated_pnl":0.21,"resolution_pnl":0.30,"exit_reason":"price_target","estimated_probability":0.88,"market_probability":0.70,"final_resolution":True,"rationale":"Powell has used 'inflation' in every FOMC presser since 2021. Word-frequency analysis of the last 6 transcripts shows 100% usage rate.","confidence":0.88,"direction":"YES"},
-    {"agent_id":"gpt-4o","market_id":"market-002","market_question":"Will Powell say 'inflation' in the next FOMC presser?","market_type":"speech","brier_score":0.14,"edge_vs_market":0.08,"directional_correct":True,"simulated_pnl":0.11,"resolution_pnl":0.19,"exit_reason":"to_resolution","estimated_probability":0.78,"market_probability":0.70,"final_resolution":True,"rationale":"Transcript analysis supports high likelihood. Slight discount for a deliberately brief statement.","confidence":0.65,"direction":"YES"},
-    {"agent_id":"market_baseline","market_id":"market-002","market_question":"Will Powell say 'inflation' in the next FOMC presser?","market_type":"speech","brier_score":0.18,"edge_vs_market":0.0,"directional_correct":None,"simulated_pnl":0.0,"resolution_pnl":0.30,"exit_reason":"no_entry","estimated_probability":0.70,"market_probability":0.70,"final_resolution":True,"rationale":"Market baseline: echoes current market probability.","confidence":0.0,"direction":"PASS"},
-    {"agent_id":"claude-sonnet","market_id":"market-003","market_question":"Will Apple release a new Mac Pro in 2025?","market_type":"long_horizon","brier_score":0.31,"edge_vs_market":-0.05,"directional_correct":False,"simulated_pnl":-0.06,"resolution_pnl":-0.10,"exit_reason":"stop_loss","estimated_probability":0.40,"market_probability":0.45,"final_resolution":False,"rationale":"M3 Ultra supply constraints suggest a delay is plausible, but the model underweighted existing roadmap signals.","confidence":0.50,"direction":"NO"},
-    {"agent_id":"gpt-4o","market_id":"market-003","market_question":"Will Apple release a new Mac Pro in 2025?","market_type":"long_horizon","brier_score":0.20,"edge_vs_market":0.10,"directional_correct":False,"simulated_pnl":0.04,"resolution_pnl":0.05,"exit_reason":"time_limit","estimated_probability":0.35,"market_probability":0.45,"final_resolution":False,"rationale":"Focus on AI MacBooks suggests Mac Pro refresh may slip to 2026. Underdog NO bet appears correct.","confidence":0.70,"direction":"NO"},
-    {"agent_id":"market_baseline","market_id":"market-003","market_question":"Will Apple release a new Mac Pro in 2025?","market_type":"long_horizon","brier_score":0.25,"edge_vs_market":0.0,"directional_correct":None,"simulated_pnl":0.0,"resolution_pnl":0.45,"exit_reason":"no_entry","estimated_probability":0.45,"market_probability":0.45,"final_resolution":False,"rationale":"Market baseline: echoes current market probability.","confidence":0.0,"direction":"PASS"},
+    {"agent_id":"claude-sonnet","market_id":"market-001","market_question":"Will the Fed cut rates in June 2025?","market_type":"long_horizon","brier_score":0.18,"edge_vs_market":0.12,"directional_correct":True,"simulated_pnl":0.15,"resolution_pnl":0.22,"exit_reason":"price_target","estimated_probability":0.53,"market_probability":0.53,"final_resolution":True,"rationale":"Recent CPI data showed cooling inflation. The Fed has signaled openness to cuts. Labor market softening supports the case for easing.","confidence":0.75,"direction":"YES","allocation":150.0},
+    {"agent_id":"gpt-4o","market_id":"market-001","market_question":"Will the Fed cut rates in June 2025?","market_type":"long_horizon","brier_score":0.24,"edge_vs_market":0.04,"directional_correct":True,"simulated_pnl":0.08,"resolution_pnl":0.12,"exit_reason":"to_resolution","estimated_probability":0.53,"market_probability":0.53,"final_resolution":True,"rationale":"Inflation is moderating but the Fed may want more data before cutting.","confidence":0.55,"direction":"YES","allocation":80.0},
+    {"agent_id":"market_baseline","market_id":"market-001","market_question":"Will the Fed cut rates in June 2025?","market_type":"long_horizon","brier_score":0.22,"edge_vs_market":0.0,"directional_correct":None,"simulated_pnl":0.0,"resolution_pnl":0.47,"exit_reason":"no_entry","estimated_probability":0.53,"market_probability":0.53,"final_resolution":True,"rationale":"Market baseline: echoes current market probability.","confidence":0.0,"direction":"PASS","allocation":0.0},
+    {"agent_id":"claude-sonnet","market_id":"market-002","market_question":"Will Powell say 'inflation' in the next FOMC presser?","market_type":"speech","brier_score":0.09,"edge_vs_market":0.18,"directional_correct":True,"simulated_pnl":0.21,"resolution_pnl":0.30,"exit_reason":"price_target","estimated_probability":0.70,"market_probability":0.70,"final_resolution":True,"rationale":"Powell has used 'inflation' in every FOMC presser since 2021. Word-frequency analysis of the last 6 transcripts shows 100% usage rate.","confidence":0.88,"direction":"YES","allocation":200.0},
+    {"agent_id":"gpt-4o","market_id":"market-002","market_question":"Will Powell say 'inflation' in the next FOMC presser?","market_type":"speech","brier_score":0.14,"edge_vs_market":0.08,"directional_correct":True,"simulated_pnl":0.11,"resolution_pnl":0.19,"exit_reason":"to_resolution","estimated_probability":0.70,"market_probability":0.70,"final_resolution":True,"rationale":"Transcript analysis supports high likelihood. Slight discount for a deliberately brief statement.","confidence":0.65,"direction":"YES","allocation":120.0},
+    {"agent_id":"market_baseline","market_id":"market-002","market_question":"Will Powell say 'inflation' in the next FOMC presser?","market_type":"speech","brier_score":0.18,"edge_vs_market":0.0,"directional_correct":None,"simulated_pnl":0.0,"resolution_pnl":0.30,"exit_reason":"no_entry","estimated_probability":0.70,"market_probability":0.70,"final_resolution":True,"rationale":"Market baseline: echoes current market probability.","confidence":0.0,"direction":"PASS","allocation":0.0},
+    {"agent_id":"claude-sonnet","market_id":"market-003","market_question":"Will Apple release a new Mac Pro in 2025?","market_type":"long_horizon","brier_score":0.31,"edge_vs_market":-0.05,"directional_correct":False,"simulated_pnl":-0.06,"resolution_pnl":-0.10,"exit_reason":"stop_loss","estimated_probability":0.45,"market_probability":0.45,"final_resolution":False,"rationale":"M3 Ultra supply constraints suggest a delay is plausible, but the model underweighted existing roadmap signals.","confidence":0.50,"direction":"NO","allocation":50.0},
+    {"agent_id":"gpt-4o","market_id":"market-003","market_question":"Will Apple release a new Mac Pro in 2025?","market_type":"long_horizon","brier_score":0.20,"edge_vs_market":0.10,"directional_correct":False,"simulated_pnl":0.04,"resolution_pnl":0.05,"exit_reason":"time_limit","estimated_probability":0.45,"market_probability":0.45,"final_resolution":False,"rationale":"Focus on AI MacBooks suggests Mac Pro refresh may slip to 2026. Underdog NO bet appears correct.","confidence":0.70,"direction":"NO","allocation":130.0},
+    {"agent_id":"market_baseline","market_id":"market-003","market_question":"Will Apple release a new Mac Pro in 2025?","market_type":"long_horizon","brier_score":0.25,"edge_vs_market":0.0,"directional_correct":None,"simulated_pnl":0.0,"resolution_pnl":0.45,"exit_reason":"no_entry","estimated_probability":0.45,"market_probability":0.45,"final_resolution":False,"rationale":"Market baseline: echoes current market probability.","confidence":0.0,"direction":"PASS","allocation":0.0},
 ]
 
 # ---------------------------------------------------------------------------
@@ -141,6 +147,12 @@ div[data-testid="stSelectbox"] > div > div { background:#12161f !important; bord
 .dir-yes { background:#0d1a12; color:#5a9e6f; border:1px solid #1a3022; padding:1px 5px; border-radius:3px; font-size:.52rem; font-weight:700; letter-spacing:.04em; }
 .dir-no  { background:#1a0d0d; color:#9e5a5a; border:1px solid #301a1a; padding:1px 5px; border-radius:3px; font-size:.52rem; font-weight:700; letter-spacing:.04em; }
 .dir-pass{ background:#12161f; color:#3a4455; border:1px solid #1e232e; padding:1px 5px; border-radius:3px; font-size:.52rem; font-weight:700; letter-spacing:.04em; }
+.pos-open   { background:#0d1a12; color:#5a9e6f; border:1px solid #1a3022; padding:1px 5px; border-radius:3px; font-size:.5rem; font-weight:700; letter-spacing:.04em; }
+.pos-closed { background:#12161f; color:#3a4455; border:1px solid #1e232e; padding:1px 5px; border-radius:3px; font-size:.5rem; font-weight:700; letter-spacing:.04em; }
+.pos-none   { color:#2e3a4a; font-size:.5rem; font-weight:600; }
+.price-up   { color:#5a9e6f; font-size:.6rem; font-family:'JetBrains Mono',monospace; }
+.price-dn   { color:#9e5a5a; font-size:.6rem; font-family:'JetBrains Mono',monospace; }
+.price-neu  { color:#3a4455; font-size:.6rem; font-family:'JetBrains Mono',monospace; }
 
 /* ── Market cards ── */
 .mc-wrap { padding:0 .75rem .75rem; display:flex; flex-direction:column; gap:.5rem; }
@@ -151,7 +163,7 @@ div[data-testid="stSelectbox"] > div > div { background:#12161f !important; bord
 .mc-meta { display:flex; gap:.3rem; flex-wrap:wrap; align-items:center; }
 .mc-agents { display:flex; flex-direction:column; gap:0; }
 .mc-arow {
-    display:grid; grid-template-columns:90px 50px 1fr 68px 52px;
+    display:grid; grid-template-columns:90px 44px 1fr 60px 56px 56px;
     align-items:center; gap:.45rem;
     padding:.35rem .7rem;
     border-bottom:1px solid #12161f;
@@ -181,57 +193,49 @@ div[data-testid="stSelectbox"] > div > div { background:#12161f !important; bord
 # Data load
 # ---------------------------------------------------------------------------
 
-RESULTS_PATH = Path("data/results.json")
-using_mock   = not RESULTS_PATH.exists()
-results      = MOCK_RESULTS if using_mock else json.loads(RESULTS_PATH.read_text())
+# Auto-refresh every 5 minutes (300,000 ms)
+if _has_autorefresh:
+    st_autorefresh(interval=300_000, key="live_refresh")
+
+RESULTS_PATH   = Path("data/results.json")
+POSITIONS_PATH = Path("data/positions.json")
+positions      = json.loads(POSITIONS_PATH.read_text()) if POSITIONS_PATH.exists() else {}
+
+_raw = json.loads(RESULTS_PATH.read_text()) if RESULTS_PATH.exists() else []
+using_mock = not _raw
+results    = MOCK_RESULTS if using_mock else _raw
 
 df = pd.DataFrame(results)
 for c in ["brier_score","edge_vs_market","simulated_pnl","resolution_pnl",
           "estimated_probability","market_probability"]:
-    df[c] = pd.to_numeric(df[c], errors="coerce").fillna(0.0)
+    if c not in df.columns:
+        df[c] = 0.0
+    else:
+        df[c] = pd.to_numeric(df[c], errors="coerce").fillna(0.0)
 
 if "confidence" not in df.columns:
     df["confidence"] = 0.5
 else:
     df["confidence"] = pd.to_numeric(df["confidence"], errors="coerce").fillna(0.5)
 
-# Direction from data if present, else infer: YES if prob >= 0.5, NO if prob < 0.5, PASS if prob == 0
-def infer_direction(row):
-    if "direction" in row and str(row.get("direction","")).upper() in ("YES","NO","PASS"):
-        return str(row["direction"]).upper()
-    prob = float(row.get("estimated_probability", 0.5))
-    if prob == 0.0:
-        return "PASS"
-    return "YES" if prob >= 0.5 else "NO"
+if "direction" not in df.columns:
+    df["direction"] = "PASS"
 
-df["direction"] = df.apply(infer_direction, axis=1)
+if "allocation" not in df.columns:
+    df["allocation"] = 0.0
+else:
+    df["allocation"] = pd.to_numeric(df["allocation"], errors="coerce").fillna(0.0)
 
 # ---------------------------------------------------------------------------
-# Wallet calculation — probability-weighted allocation
+# Wallet calculation — agent-decided allocation
 # ---------------------------------------------------------------------------
-# Each agent has $1,000 total budget split across all markets.
-# Allocation per market = (estimated_probability / sum_of_all_probs) * $1,000
-# 0% probability = $0 allocated (PASS).
+# Each agent allocates a dollar amount per market (their own decision, $0–$200).
 # pnl_dollars = allocation * simulated_pnl
-# final wallet = $1,000 + sum(pnl_dollars)  [gains/losses on top of starting balance]
+# wallet = $1,000 + sum(pnl_dollars)
 
 STARTING_BALANCE = 1000.0
 
-# Compute total probability weight per agent across all markets
-prob_totals = df[df["direction"] != "PASS"].groupby("agent_id")["estimated_probability"].sum().rename("prob_total")
-df = df.join(prob_totals, on="agent_id")
-df["prob_total"] = df["prob_total"].fillna(1.0)
-
-def calc_stake(row):
-    if str(row.get("direction", "PASS")).upper() == "PASS":
-        return 0.0
-    prob = float(row.get("estimated_probability", 0.0))
-    if prob == 0.0:
-        return 0.0
-    total = float(row.get("prob_total", 1.0))
-    return (prob / total) * STARTING_BALANCE
-
-df["stake"]       = df.apply(calc_stake, axis=1)
+df["stake"]       = df["allocation"]
 df["pnl_dollars"] = df["stake"] * df["simulated_pnl"]
 
 # Leaderboard aggregation
@@ -283,6 +287,7 @@ def agent_initials(name):
 
 bc_cls = "dbadge-mock" if using_mock else "dbadge-live"
 bc_txt = "MOCK"        if using_mock else "● LIVE"
+refresh_txt = "auto-refresh 5m" if _has_autorefresh else "static"
 
 st.markdown(f"""
 <div class="topbar">
@@ -295,6 +300,7 @@ st.markdown(f"""
   </div>
   <div class="t-right">
     <span class="dbadge {bc_cls}">{bc_txt}</span>
+    <span style="font-size:.6rem;color:#3a4455">{refresh_txt}</span>
     <button class="tbtn tbtn-g">Run Evaluation</button>
   </div>
 </div>
@@ -410,10 +416,10 @@ with left:
             <span class="{dir_cls}" style="margin-left:auto">{direction}</span>
           </div>
           <div class="tc-stats">
-            <div class="tc-s"><div class="tc-sl">P(YES)</div><div class="tc-sv">{est:.0%}</div></div>
-            <div class="tc-s"><div class="tc-sl">Edge</div><div class="tc-sv" style="color:{ec2}">{edg:+.3f}</div></div>
-            <div class="tc-s"><div class="tc-sl">Stake</div><div class="tc-sv">${stk:.0f}</div></div>
-            <div class="tc-s"><div class="tc-sl">P&L</div><div class="tc-sv" style="color:{dc2}">{pnl_d:+.2f}</div></div>
+            <div class="tc-s"><div class="tc-sl">Mkt Price</div><div class="tc-sv">{est:.0%}</div></div>
+            <div class="tc-s"><div class="tc-sl">Allocated</div><div class="tc-sv">${stk:.0f}</div></div>
+            <div class="tc-s"><div class="tc-sl">P&L $</div><div class="tc-sv" style="color:{dc2}">{pnl_d:+.2f}</div></div>
+            <div class="tc-s"><div class="tc-sl">Exit</div><div class="tc-sv" style="font-size:.6rem">{str(r.get('exit_reason','—')).replace('_',' ')}</div></div>
           </div>
           <div class="tc-rt">{r['rationale']}</div>
         </div>"""
@@ -447,19 +453,35 @@ with right:
             if arow.empty:
                 continue
             r         = arow.iloc[0]
-            est       = float(r["estimated_probability"])
-            edg       = float(r["edge_vs_market"])
             stk       = float(r["stake"])
             pnl_d     = float(r["pnl_dollars"])
             direction = str(r.get("direction","PASS")).upper()
             col       = ac(agent)
             ico       = agent_initials(agent)
-            pw        = int(est * 100)
-            ec2       = pcs(edg)
+            bar_w     = int((stk / 200.0) * 100)
             dc2       = pcs(pnl_d)
             dir_cls   = {"YES":"dir-yes","NO":"dir-no"}.get(direction,"dir-pass")
             stake_txt = f"${stk:.0f}" if stk > 0 else "—"
             pnl_txt   = f"{pnl_d:+.2f}" if stk > 0 else "—"
+
+            # Position status from ledger
+            pos       = positions.get(agent, {}).get(q) or positions.get(agent, {}).get(str(r.get("market_id","")))
+            if pos:
+                status     = pos.get("status", "none")
+                entry_p    = pos.get("entry_price")
+                live_p     = pos.get("current_price", mkt_p)
+                pos_cls    = "pos-open" if status == "open" else ("pos-closed" if status == "closed" else "pos-none")
+                pos_lbl    = "OPEN" if status == "open" else ("SOLD" if status == "closed" else "—")
+                if entry_p and status in ("open", "closed"):
+                    diff = live_p - entry_p
+                    diff_cls = "price-up" if diff > 0.001 else ("price-dn" if diff < -0.001 else "price-neu")
+                    price_html = f'<span class="{diff_cls}">{entry_p:.0%}→{live_p:.0%}</span>'
+                else:
+                    price_html = f'<span class="price-neu">{live_p:.0%}</span>'
+            else:
+                pos_cls    = "pos-none"
+                pos_lbl    = "—"
+                price_html = f'<span class="price-neu">{mkt_p:.0%}</span>'
 
             agent_rows += f"""
             <div class="mc-arow">
@@ -467,13 +489,12 @@ with right:
                 <div class="av" style="background:{col};width:18px;height:18px;font-size:.48rem">{ico}</div>
                 <span class="mc-anm">{agent}</span>
               </div>
-              <div class="mc-prob">{est:.0%}</div>
+              <div class="mc-prob"><span class="{dir_cls}">{direction}</span></div>
               <div class="mc-bar-wrap">
-                <div class="mc-bar-fill" style="width:{pw}%;background:{col}70"></div>
+                <div class="mc-bar-fill" style="width:{bar_w}%;background:{col}70"></div>
               </div>
-              <div class="mc-stake">
-                <span class="{dir_cls}">{direction}</span> {stake_txt}
-              </div>
+              <div class="mc-stake">{stake_txt}</div>
+              <div style="text-align:right">{price_html}<br><span class="{pos_cls}">{pos_lbl}</span></div>
               <div class="mc-edgcell" style="color:{dc2}">{pnl_txt}</div>
             </div>"""
 

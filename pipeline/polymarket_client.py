@@ -126,6 +126,22 @@ def fetch_market(slug: str) -> MarketSnapshot:
     return snapshot
 
 
+def fetch_current_price(slug: str) -> float | None:
+    """Fetch only the current YES price for a slug — no cache, no price history."""
+    try:
+        resp = httpx.get(f"{GAMMA_BASE}/markets", params={"slug": slug}, timeout=10)
+        resp.raise_for_status()
+        markets = resp.json()
+        if not markets:
+            return None
+        m = markets[0]
+        outcome_prices_raw = m.get("outcomePrices", "[\"0.5\", \"0.5\"]")
+        outcome_prices = json.loads(outcome_prices_raw) if isinstance(outcome_prices_raw, str) else outcome_prices_raw
+        return float(outcome_prices[0]) if outcome_prices else None
+    except Exception:
+        return None
+
+
 if __name__ == "__main__":
     import sys
     slug = sys.argv[1] if len(sys.argv) > 1 else "will-the-fed-cut-rates-in-june-2025"

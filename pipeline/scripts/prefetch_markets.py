@@ -13,11 +13,11 @@ from pipeline.polymarket_client import fetch_market
 # ── Long-horizon markets ─────────────────────────────────────────────────────
 # Active markets fitting the long-horizon adapter: policy, geopolitics, macro
 LONG_HORIZON_SLUGS = [
-    "will-metamask-launch-a-token-by-june-30",
-    "will-the-republican-party-hold-57-or-more-senate-seats-after-the-2026-midterm-elections",
-    "will-apple-be-the-largest-company-in-the-world-by-market-cap-on-december-31-291",
-    "will-russia-enter-druzkhivka-by-june-30-933-897",
-    "will-juan-carlos-pinzn-win-the-1st-round-of-the-2026-colombian-presidential-election",
+    "will-the-democratic-party-control-the-senate-after-the-2026-midterm-elections",
+    "will-the-republicans-win-the-2028-us-presidential-election",
+    "netanyahu-out-before-2027-684",
+    "russia-x-ukraine-ceasefire-before-2027",
+    "will-jd-vance-win-the-2028-republican-presidential-nomination",
 ]
 
 # ── Speech markets ────────────────────────────────────────────────────────────

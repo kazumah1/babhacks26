@@ -12,6 +12,7 @@ class MarketBaselineAgent(BaseAgent):
             estimated_probability=context.current_probability,
             direction="PASS",
             confidence=1.0,
+            allocation=0.0,
             entry_condition=EntryCondition(trigger="immediate", threshold=None, rationale="Baseline"),
             exit_condition=ExitCondition(
                 trigger="to_resolution", price_target=None,

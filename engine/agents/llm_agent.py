@@ -3,11 +3,11 @@ from datetime import datetime
 from shared.types import AdapterContext, TradingSignal, EntryCondition, ExitCondition
 from engine.agents.base_agent import BaseAgent
 
-AGENT_PROMPT = """You are a prediction market trading agent. Output valid JSON only, no preamble.
+AGENT_PROMPT = """You are a Polymarket trading agent. Output valid JSON only, no preamble.
 
 Market Question: {question}
 Market Type: {market_type}
-Current Market Probability (YES): {probability:.1%}
+Current Market Price (YES): {probability:.1%}
 Analysis Date: {date}
 Days to Resolution: {days}
 
@@ -15,16 +15,23 @@ Days to Resolution: {days}
 {context}
 --- END CONTEXT ---
 
-1. Estimate true probability of YES resolution.
-2. Decide YES, NO, or PASS.
-3. Specify entry: immediate, or wait for price threshold.
+You have a $1,000 total budget spread across all markets you are evaluating today.
+The market price above is the current price — you are buying YES or NO shares at that price.
+Rules:
+- Allocate $0–$200 per market (stay diversified).
+- PASS (allocation = 0) if you have no edge or conviction.
+- Your total allocations across all markets must not exceed $1,000.
+
+1. Decide YES, NO, or PASS based on your read of the market.
+2. Choose how many dollars to allocate (0 if PASS).
+3. Specify entry: immediate, or wait for a price threshold.
 4. Specify exit: price target, time limit, stop loss, or hold to resolution.
 5. Rationale: 3-5 sentences.
 
 Respond ONLY with:
 {{
-  "estimated_probability": float,
   "direction": "YES"|"NO"|"PASS",
+  "allocation": float,
   "confidence": float,
   "entry_condition": {{"trigger": "immediate"|"price_threshold"|"time_threshold", "threshold": float|null, "rationale": string}},
   "exit_condition": {{"trigger": "price_target"|"time_limit"|"stop_loss"|"to_resolution", "price_target": float|null, "time_limit": "ISO string"|null, "stop_loss": float|null, "rationale": string}},
@@ -81,10 +88,15 @@ class LLMAgent(BaseAgent):
         clean = raw.replace("```json", "").replace("```", "").strip()
         d = json.loads(clean)
 
-        # Normalize probabilities: some models return 0-100 instead of 0-1
-        for key in ("estimated_probability", "confidence"):
-            if d.get(key, 0) > 1:
-                d[key] = d[key] / 100.0
+        # Normalize confidence if returned as 0-100
+        if d.get("confidence", 0) > 1:
+            d["confidence"] = d["confidence"] / 100.0
+
+        # Clamp allocation to [0, 200], default 100 if missing
+        allocation = float(d.get("allocation", 100.0))
+        if d.get("direction", "PASS").upper() == "PASS":
+            allocation = 0.0
+        allocation = max(0.0, min(200.0, allocation))
 
         def parse_time_limit(val):
             if val is None:
@@ -97,9 +109,10 @@ class LLMAgent(BaseAgent):
         return TradingSignal(
             agent_id=self.agent_id,
             market_id=context.market_id,
-            estimated_probability=d["estimated_probability"],
-            direction=d["direction"],
-            confidence=d["confidence"],
+            estimated_probability=context.current_probability,  # accept market price
+            direction=d.get("direction", "PASS"),
+            confidence=d.get("confidence", 0.5),
+            allocation=allocation,
             entry_condition=EntryCondition(**d["entry_condition"]),
             exit_condition=ExitCondition(
                 trigger=d["exit_condition"]["trigger"],

@@ -35,5 +35,6 @@ def evaluate_agent(
         estimated_probability=signal.estimated_probability,
         market_probability=market_prob,
         final_resolution=resolution,
-        rationale=signal.rationale
+        rationale=signal.rationale,
+        allocation=signal.allocation,
     )

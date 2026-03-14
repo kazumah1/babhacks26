@@ -63,7 +63,7 @@ class SpeechAdapter(BaseAdapter):
 
         # Step 1: extract speaker / phrase / event metadata
         meta_resp = client.messages.create(
-            model="claude-sonnet-4-6",
+            model="claude-haiku-4-5-20251001",
             max_tokens=256,
             messages=[{
                 "role": "user",
@@ -81,7 +81,7 @@ class SpeechAdapter(BaseAdapter):
 
         # Step 2: analyze linguistic patterns via web search
         analysis_resp = client.messages.create(
-            model="claude-sonnet-4-6",
+            model="claude-haiku-4-5-20251001",
             max_tokens=2048,
             tools=[{"type": "web_search_20250305", "name": "web_search"}],
             messages=[{
