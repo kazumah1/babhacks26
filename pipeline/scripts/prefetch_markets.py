@@ -1,0 +1,56 @@
+"""
+prefetch_markets.py — run this before the demo to cache all market data.
+
+Usage:
+    python3 -m pipeline.scripts.prefetch_markets
+
+Writes JSON to data/cache/<slug>.json. The fetch_market() function will use
+these cached files and skip any live API calls during the presentation.
+"""
+
+from pipeline.polymarket_client import fetch_market
+
+# ── Long-horizon markets ─────────────────────────────────────────────────────
+# Active markets fitting the long-horizon adapter: policy, geopolitics, macro
+LONG_HORIZON_SLUGS = [
+    "will-metamask-launch-a-token-by-june-30",
+    "will-the-republican-party-hold-57-or-more-senate-seats-after-the-2026-midterm-elections",
+    "will-apple-be-the-largest-company-in-the-world-by-market-cap-on-december-31-291",
+    "will-russia-enter-druzkhivka-by-june-30-933-897",
+    "will-juan-carlos-pinzn-win-the-1st-round-of-the-2026-colombian-presidential-election",
+]
+
+# ── Speech markets ────────────────────────────────────────────────────────────
+# Active markets fitting the speech adapter: will person say/post X
+SPEECH_SLUGS = [
+    "will-jensen-huang-say-anthropic-at-the-nvidia-gtc-keynote",
+    "elon-musk-of-tweets-march-13-march-20-40-59",
+    "donald-trump-of-truth-social-posts-march-10-march-17-200plus",
+]
+
+ALL_SLUGS = [
+    ("long_horizon", s) for s in LONG_HORIZON_SLUGS
+] + [
+    ("speech", s) for s in SPEECH_SLUGS
+]
+
+
+def prefetch_all() -> None:
+    ok, failed = 0, 0
+    for adapter_type, slug in ALL_SLUGS:
+        print(f"[{adapter_type}] {slug} ...", end=" ", flush=True)
+        try:
+            m = fetch_market(slug)
+            pts = len(m.price_history)
+            resolved = f"resolved={m.resolution}" if m.resolved else "open"
+            print(f"OK  | {pts} price pts | {resolved} | {m.question[:55]}")
+            ok += 1
+        except Exception as e:
+            print(f"FAIL | {e}")
+            failed += 1
+
+    print(f"\nDone: {ok} succeeded, {failed} failed.")
+
+
+if __name__ == "__main__":
+    prefetch_all()
