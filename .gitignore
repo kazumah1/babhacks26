@@ -1,39 +1,22 @@
+# Environment
+.env
+
 # Python
 __pycache__/
 *.py[cod]
-*.pyo
-.Python
 *.egg-info/
+.venv/
+venv/
 dist/
 build/
 
-# Virtual environments
-.venv/
-venv/
-env/
-.conda/
-
-# Environment / secrets
-.env
-.env.*
-!.env.example
-
-# Market data cache (pre-fetch before demo, don't commit)
-data/cache/*.json
+# Data cache (pre-fetched markets — regenerate with prefetch script)
+data/cache/
+data/results.json
 
 # IDE
 .vscode/
 .idea/
-*.swp
-*.swo
 
 # macOS
 .DS_Store
-
-# Streamlit
-.streamlit/secrets.toml
-
-# Test / coverage artifacts
-.pytest_cache/
-.coverage
-htmlcov/
