@@ -1,5 +1,9 @@
 import json
+import os
 from datetime import datetime
+from dotenv import load_dotenv
+load_dotenv()
+
 from shared.types import AdapterContext, TradingSignal, EntryCondition, ExitCondition
 from engine.agents.base_agent import BaseAgent
 
@@ -11,9 +15,9 @@ Current Market Price (YES): {probability:.1%}
 Analysis Date: {date}
 Days to Resolution: {days}
 
---- CONTEXT ---
+--- LIVE RESEARCH (your own web search results) ---
 {context}
---- END CONTEXT ---
+--- END RESEARCH ---
 
 You have a $1,000 total budget spread across all markets you are evaluating today.
 The market price above is the current price — you are buying YES or NO shares at that price.
@@ -26,7 +30,7 @@ Rules:
 2. Choose how many dollars to allocate (0 if PASS).
 3. Specify entry: immediate, or wait for a price threshold.
 4. Specify exit: price target, time limit, stop loss, or hold to resolution.
-5. Rationale: 3-5 sentences.
+5. Rationale: 3-5 sentences citing specifics from the research above.
 
 Respond ONLY with:
 {{
@@ -40,6 +44,23 @@ Respond ONLY with:
 }}"""
 
 
+def _tavily_search(query: str, max_results: int = 5) -> str:
+    """Run a Tavily search and return formatted snippets for the agent prompt."""
+    try:
+        from tavily import TavilyClient
+        client = TavilyClient(api_key=os.environ["TAVILY_API_KEY"])
+        resp = client.search(query=query, max_results=max_results, search_depth="basic")
+        snippets = []
+        for r in resp.get("results", []):
+            title = r.get("title", "")
+            content = r.get("content", "")
+            url = r.get("url", "")
+            snippets.append(f"[{title}] {content}\nSource: {url}")
+        return "\n\n".join(snippets) if snippets else "No results found."
+    except Exception as e:
+        return f"Search unavailable: {e}"
+
+
 class LLMAgent(BaseAgent):
     def __init__(self, agent_id: str, model: str, provider: str = "anthropic"):
         self.agent_id = agent_id
@@ -48,13 +69,18 @@ class LLMAgent(BaseAgent):
 
     def trade(self, context: AdapterContext) -> TradingSignal:
         days = context.metadata.get("days_to_resolution", 30)
+
+        # Each agent does its own Tavily search — produces unique context per model
+        search_query = f"{context.market_question} prediction market analysis {datetime.now().year}"
+        live_research = _tavily_search(search_query)
+
         prompt = AGENT_PROMPT.format(
             question=context.market_question,
             market_type=context.market_type,
             probability=context.current_probability,
             date=context.replay_timestamp.strftime("%Y-%m-%d"),
             days=days,
-            context="\n\n---\n\n".join(context.context_documents)
+            context=live_research,
         )
 
         if self.provider == "anthropic":

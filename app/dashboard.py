@@ -163,7 +163,7 @@ div[data-testid="stSelectbox"] > div > div { background:#12161f !important; bord
 .mc-meta { display:flex; gap:.3rem; flex-wrap:wrap; align-items:center; }
 .mc-agents { display:flex; flex-direction:column; gap:0; }
 .mc-arow {
-    display:grid; grid-template-columns:90px 44px 1fr 60px 56px 56px;
+    display:grid; grid-template-columns:90px 44px 1fr 56px 60px 56px;
     align-items:center; gap:.45rem;
     padding:.35rem .7rem;
     border-bottom:1px solid #12161f;
@@ -172,8 +172,11 @@ div[data-testid="stSelectbox"] > div > div { background:#12161f !important; bord
 .mc-aname { display:flex; align-items:center; gap:5px; }
 .mc-anm { font-size:.66rem; font-weight:500; color:#5a6478; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .mc-prob { font-size:.78rem; font-weight:700; font-family:'JetBrains Mono',monospace; color:#8a95a8; text-align:right; }
-.mc-bar-wrap { position:relative; height:3px; background:#1a1e28; border-radius:2px; overflow:hidden; }
-.mc-bar-fill { position:absolute; top:0; left:0; height:100%; border-radius:2px; }
+/* ── Allocation line graph ── */
+.alloc-line { position:relative; height:14px; display:flex; align-items:center; }
+.alloc-track { position:absolute; left:0; right:0; top:50%; height:1px; background:#1e232e; transform:translateY(-50%); }
+.alloc-dot { position:absolute; width:6px; height:6px; border-radius:50%; top:50%; transform:translate(-50%,-50%); }
+.alloc-tick { position:absolute; top:50%; width:1px; height:5px; background:#1e232e; transform:translateY(-50%); }
 .mc-edgcell { font-size:.63rem; font-weight:600; font-family:'JetBrains Mono',monospace; text-align:right; white-space:nowrap; color:#3a4455; }
 .mc-stake { font-size:.6rem; font-family:'JetBrains Mono',monospace; text-align:right; white-space:nowrap; color:#4a5568; }
 
@@ -458,11 +461,12 @@ with right:
             direction = str(r.get("direction","PASS")).upper()
             col       = ac(agent)
             ico       = agent_initials(agent)
-            bar_w     = int((stk / 200.0) * 100)
+            dot_pct   = (stk / 200.0) * 100  # position on 0–$200 line
             dc2       = pcs(pnl_d)
             dir_cls   = {"YES":"dir-yes","NO":"dir-no"}.get(direction,"dir-pass")
             stake_txt = f"${stk:.0f}" if stk > 0 else "—"
             pnl_txt   = f"{pnl_d:+.2f}" if stk > 0 else "—"
+            dot_col   = col if stk > 0 else "#1e232e"
 
             # Position status from ledger
             pos       = positions.get(agent, {}).get(q) or positions.get(agent, {}).get(str(r.get("market_id","")))
@@ -490,8 +494,12 @@ with right:
                 <span class="mc-anm">{agent}</span>
               </div>
               <div class="mc-prob"><span class="{dir_cls}">{direction}</span></div>
-              <div class="mc-bar-wrap">
-                <div class="mc-bar-fill" style="width:{bar_w}%;background:{col}70"></div>
+              <div class="alloc-line">
+                <div class="alloc-track"></div>
+                <div class="alloc-tick" style="left:25%"></div>
+                <div class="alloc-tick" style="left:50%"></div>
+                <div class="alloc-tick" style="left:75%"></div>
+                <div class="alloc-dot" style="left:{dot_pct}%;background:{dot_col};box-shadow:0 0 4px {dot_col}80"></div>
               </div>
               <div class="mc-stake">{stake_txt}</div>
               <div style="text-align:right">{price_html}<br><span class="{pos_cls}">{pos_lbl}</span></div>

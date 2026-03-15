@@ -30,10 +30,11 @@ MARKET_SLUGS = [
     "netanyahu-out-before-2027-684",
     "russia-x-ukraine-ceasefire-before-2027",
     "will-jd-vance-win-the-2028-republican-presidential-nomination",
-    # Speech — will person say/post X
+    # More long-horizon replacements for expired speech markets
+    "will-the-iranian-regime-fall-by-the-end-of-2026",
+    "us-x-iran-ceasefire-by-june-30-752",
+    # Speech
     "will-jensen-huang-say-anthropic-at-the-nvidia-gtc-keynote",
-    "elon-musk-of-tweets-march-13-march-20-40-59",
-    "donald-trump-of-truth-social-posts-march-10-march-17-200plus",
 ]
 
 

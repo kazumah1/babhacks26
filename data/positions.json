@@ -1,73 +1,37 @@
 {
   "gemini-flash": {
-    "will-jensen-huang-say-anthropic-at-the-nvidia-gtc-keynote": {
-      "status": "open",
-      "direction": "NO",
-      "allocation": 100.0,
-      "entry_price": 0.305,
-      "entry_time": "2026-03-14T16:40:55.600078",
-      "exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "pnl_dollars": 0.0,
-      "current_price": 0.305,
-      "exit_condition": {
-        "trigger": "price_target",
-        "price_target": 0.5,
-        "time_limit": null,
-        "stop_loss": null
-      }
-    },
-    "will-the-democratic-party-control-the-senate-after-the-2026-midterm-elections": {
-      "status": "open",
-      "direction": "YES",
-      "allocation": 100.0,
-      "entry_price": 0.505,
-      "entry_time": "2026-03-14T16:40:55.775268",
-      "exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "pnl_dollars": 0.0,
-      "current_price": 0.505,
-      "exit_condition": {
-        "trigger": "price_target",
-        "price_target": 0.65,
-        "time_limit": null,
-        "stop_loss": null
-      }
-    },
-    "netanyahu-out-before-2027-684": {
+    "will-jd-vance-win-the-2028-republican-presidential-nomination": {
       "status": "open",
       "direction": "YES",
       "allocation": 150.0,
-      "entry_price": 0.45,
-      "entry_time": "2026-03-14T16:40:56.017953",
+      "entry_price": 0.3815,
+      "entry_time": "2026-03-14T17:03:51.185519",
       "exit_price": null,
       "exit_time": null,
       "exit_reason": null,
       "pnl_dollars": 0.0,
-      "current_price": 0.45,
+      "current_price": 0.3815,
       "exit_condition": {
         "trigger": "price_target",
         "price_target": 0.65,
         "time_limit": null,
-        "stop_loss": 0.35
+        "stop_loss": null
       }
     },
-    "russia-x-ukraine-ceasefire-before-2027": {
+    "will-jensen-huang-say-anthropic-at-the-nvidia-gtc-keynote": {
       "status": "open",
       "direction": "YES",
-      "allocation": 100.0,
-      "entry_price": 0.375,
-      "entry_time": "2026-03-14T16:40:56.018500",
+      "allocation": 50.0,
+      "entry_price": 0.295,
+      "entry_time": "2026-03-14T17:03:51.597398",
       "exit_price": null,
       "exit_time": null,
       "exit_reason": null,
       "pnl_dollars": 0.0,
-      "current_price": 0.375,
+      "current_price": 0.295,
       "exit_condition": {
         "trigger": "price_target",
-        "price_target": 0.55,
+        "price_target": 0.75,
         "time_limit": null,
         "stop_loss": null
       }
@@ -77,7 +41,7 @@
       "direction": "NO",
       "allocation": 100.0,
       "entry_price": 0.445,
-      "entry_time": "2026-03-14T16:40:56.026219",
+      "entry_time": "2026-03-14T17:03:51.698486",
       "exit_price": null,
       "exit_time": null,
       "exit_reason": null,
@@ -90,199 +54,148 @@
         "stop_loss": null
       }
     },
-    "donald-trump-of-truth-social-posts-march-10-march-17-200plus": {
+    "will-the-democratic-party-control-the-senate-after-the-2026-midterm-elections": {
       "status": "open",
       "direction": "NO",
       "allocation": 100.0,
-      "entry_price": 0.0255,
-      "entry_time": "2026-03-14T16:40:56.050230",
+      "entry_price": 0.505,
+      "entry_time": "2026-03-14T17:03:51.729608",
       "exit_price": null,
       "exit_time": null,
       "exit_reason": null,
       "pnl_dollars": 0.0,
-      "current_price": 0.0255,
+      "current_price": 0.505,
       "exit_condition": {
         "trigger": "price_target",
-        "price_target": 0.1,
+        "price_target": 0.65,
         "time_limit": null,
         "stop_loss": null
       }
     },
-    "will-jd-vance-win-the-2028-republican-presidential-nomination": {
+    "russia-x-ukraine-ceasefire-before-2027": {
       "status": "open",
       "direction": "NO",
       "allocation": 100.0,
-      "entry_price": 0.382,
-      "entry_time": "2026-03-14T16:40:56.088226",
+      "entry_price": 0.375,
+      "entry_time": "2026-03-14T17:03:51.942375",
       "exit_price": null,
       "exit_time": null,
       "exit_reason": null,
       "pnl_dollars": 0.0,
-      "current_price": 0.382,
+      "current_price": 0.375,
       "exit_condition": {
         "trigger": "price_target",
-        "price_target": 0.55,
+        "price_target": 0.6,
         "time_limit": null,
         "stop_loss": null
       }
     },
-    "elon-musk-of-tweets-march-13-march-20-40-59": {
+    "netanyahu-out-before-2027-684": {
       "status": "open",
-      "direction": "NO",
-      "allocation": 200.0,
-      "entry_price": 0.0005,
-      "entry_time": "2026-03-14T16:40:56.117330",
+      "direction": "YES",
+      "allocation": 100.0,
+      "entry_price": 0.465,
+      "entry_time": "2026-03-14T17:03:51.975626",
       "exit_price": null,
       "exit_time": null,
       "exit_reason": null,
       "pnl_dollars": 0.0,
-      "current_price": 0.0005,
+      "current_price": 0.465,
       "exit_condition": {
         "trigger": "price_target",
-        "price_target": 0.2,
+        "price_target": 0.65,
         "time_limit": null,
         "stop_loss": null
       }
     }
   },
   "gpt-4o": {
-    "will-the-republicans-win-the-2028-us-presidential-election": {
-      "status": "open",
-      "direction": "NO",
-      "allocation": 150.0,
-      "entry_price": 0.445,
-      "entry_time": "2026-03-14T16:40:56.001379",
-      "exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "pnl_dollars": 0.0,
-      "current_price": 0.445,
-      "exit_condition": {
-        "trigger": "price_target",
-        "price_target": 60.0,
-        "time_limit": null,
-        "stop_loss": null
-      }
-    },
-    "will-jensen-huang-say-anthropic-at-the-nvidia-gtc-keynote": {
-      "status": "open",
-      "direction": "NO",
-      "allocation": 150.0,
-      "entry_price": 0.305,
-      "entry_time": "2026-03-14T16:40:56.002668",
-      "exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "pnl_dollars": 0.0,
-      "current_price": 0.305,
-      "exit_condition": {
-        "trigger": "to_resolution",
-        "price_target": null,
-        "time_limit": null,
-        "stop_loss": null
-      }
-    },
-    "netanyahu-out-before-2027-684": {
+    "will-jd-vance-win-the-2028-republican-presidential-nomination": {
       "status": "open",
       "direction": "YES",
       "allocation": 150.0,
-      "entry_price": 0.45,
-      "entry_time": "2026-03-14T16:40:56.180179",
+      "entry_price": 0.3815,
+      "entry_time": "2026-03-14T17:03:51.399649",
       "exit_price": null,
       "exit_time": null,
       "exit_reason": null,
       "pnl_dollars": 0.0,
-      "current_price": 0.45,
+      "current_price": 0.3815,
       "exit_condition": {
-        "trigger": "to_resolution",
-        "price_target": null,
+        "trigger": "price_target",
+        "price_target": 60,
         "time_limit": null,
-        "stop_loss": null
+        "stop_loss": 25
       }
+    },
+    "russia-x-ukraine-ceasefire-before-2027": {
+      "status": "none",
+      "direction": "PASS",
+      "allocation": 0,
+      "entry_price": null,
+      "entry_time": null,
+      "exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "pnl_dollars": 0.0,
+      "current_price": 0.375,
+      "exit_condition": {}
     },
     "will-the-democratic-party-control-the-senate-after-the-2026-midterm-elections": {
       "status": "open",
-      "direction": "YES",
+      "direction": "NO",
       "allocation": 150.0,
       "entry_price": 0.505,
-      "entry_time": "2026-03-14T16:40:56.276002",
+      "entry_time": "2026-03-14T17:03:51.790029",
       "exit_price": null,
       "exit_time": null,
       "exit_reason": null,
       "pnl_dollars": 0.0,
       "current_price": 0.505,
       "exit_condition": {
-        "trigger": "price_target",
-        "price_target": 65,
-        "time_limit": null,
-        "stop_loss": 45
-      }
-    },
-    "will-jd-vance-win-the-2028-republican-presidential-nomination": {
-      "status": "open",
-      "direction": "YES",
-      "allocation": 150.0,
-      "entry_price": 0.382,
-      "entry_time": "2026-03-14T16:40:56.306158",
-      "exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "pnl_dollars": 0.0,
-      "current_price": 0.382,
-      "exit_condition": {
-        "trigger": "time_limit",
-        "price_target": null,
-        "time_limit": "2027-01-15T00:00:00+00:00",
-        "stop_loss": null
-      }
-    },
-    "elon-musk-of-tweets-march-13-march-20-40-59": {
-      "status": "open",
-      "direction": "NO",
-      "allocation": 200.0,
-      "entry_price": 0.0005,
-      "entry_time": "2026-03-14T16:40:56.526561",
-      "exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "pnl_dollars": 0.0,
-      "current_price": 0.0005,
-      "exit_condition": {
         "trigger": "to_resolution",
         "price_target": null,
         "time_limit": null,
         "stop_loss": null
       }
     },
-    "russia-x-ukraine-ceasefire-before-2027": {
+    "will-the-republicans-win-the-2028-us-presidential-election": {
+      "status": "none",
+      "direction": "PASS",
+      "allocation": 0,
+      "entry_price": null,
+      "entry_time": null,
+      "exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "pnl_dollars": 0.0,
+      "current_price": 0.445,
+      "exit_condition": {}
+    },
+    "will-jensen-huang-say-anthropic-at-the-nvidia-gtc-keynote": {
+      "status": "none",
+      "direction": "PASS",
+      "allocation": 0,
+      "entry_price": null,
+      "entry_time": null,
+      "exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "pnl_dollars": 0.0,
+      "current_price": 0.295,
+      "exit_condition": {}
+    },
+    "netanyahu-out-before-2027-684": {
       "status": "open",
       "direction": "YES",
-      "allocation": 100.0,
-      "entry_price": 0.375,
-      "entry_time": "2026-03-14T16:40:56.582475",
-      "exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "pnl_dollars": 0.0,
-      "current_price": 0.375,
-      "exit_condition": {
-        "trigger": "price_target",
-        "price_target": 50.0,
-        "time_limit": null,
-        "stop_loss": null
-      }
-    },
-    "donald-trump-of-truth-social-posts-march-10-march-17-200plus": {
-      "status": "open",
-      "direction": "NO",
       "allocation": 150.0,
-      "entry_price": 0.0255,
-      "entry_time": "2026-03-14T16:40:57.218209",
+      "entry_price": 0.465,
+      "entry_time": "2026-03-14T17:03:52.316176",
       "exit_price": null,
       "exit_time": null,
       "exit_reason": null,
       "pnl_dollars": 0.0,
-      "current_price": 0.0255,
+      "current_price": 0.465,
       "exit_condition": {
         "trigger": "to_resolution",
         "price_target": null,
@@ -292,66 +205,43 @@
     }
   },
   "claude-sonnet": {
+    "netanyahu-out-before-2027-684": {
+      "status": "none",
+      "direction": "PASS",
+      "allocation": 0,
+      "entry_price": null,
+      "entry_time": null,
+      "exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "pnl_dollars": 0.0,
+      "current_price": 0.465,
+      "exit_condition": {}
+    },
     "will-jensen-huang-say-anthropic-at-the-nvidia-gtc-keynote": {
       "status": "open",
       "direction": "NO",
       "allocation": 150.0,
-      "entry_price": 0.305,
-      "entry_time": "2026-03-14T16:41:00.373308",
+      "entry_price": 0.295,
+      "entry_time": "2026-03-14T17:03:56.335842",
       "exit_price": null,
       "exit_time": null,
       "exit_reason": null,
       "pnl_dollars": 0.0,
-      "current_price": 0.305,
-      "exit_condition": {
-        "trigger": "price_target",
-        "price_target": 15,
-        "time_limit": null,
-        "stop_loss": 45
-      }
-    },
-    "will-the-democratic-party-control-the-senate-after-the-2026-midterm-elections": {
-      "status": "open",
-      "direction": "YES",
-      "allocation": 120.0,
-      "entry_price": 0.505,
-      "entry_time": "2026-03-14T16:41:00.717557",
-      "exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "pnl_dollars": 0.0,
-      "current_price": 0.505,
-      "exit_condition": {
-        "trigger": "price_target",
-        "price_target": 62.0,
-        "time_limit": null,
-        "stop_loss": 38.0
-      }
-    },
-    "elon-musk-of-tweets-march-13-march-20-40-59": {
-      "status": "open",
-      "direction": "NO",
-      "allocation": 120.0,
-      "entry_price": 0.0005,
-      "entry_time": "2026-03-14T16:41:00.793957",
-      "exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "pnl_dollars": 0.0,
-      "current_price": 0.0005,
+      "current_price": 0.295,
       "exit_condition": {
         "trigger": "to_resolution",
         "price_target": null,
         "time_limit": null,
-        "stop_loss": 0.9
+        "stop_loss": 0.4
       }
     },
     "will-the-republicans-win-the-2028-us-presidential-election": {
       "status": "open",
       "direction": "NO",
-      "allocation": 120.0,
+      "allocation": 150.0,
       "entry_price": 0.445,
-      "entry_time": "2026-03-14T16:41:00.852724",
+      "entry_time": "2026-03-14T17:03:56.488729",
       "exit_price": null,
       "exit_time": null,
       "exit_reason": null,
@@ -361,69 +251,33 @@
         "trigger": "price_target",
         "price_target": 35,
         "time_limit": null,
-        "stop_loss": 52
-      }
-    },
-    "netanyahu-out-before-2027-684": {
-      "status": "open",
-      "direction": "YES",
-      "allocation": 125.0,
-      "entry_price": 0.45,
-      "entry_time": "2026-03-14T16:41:01.315557",
-      "exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "pnl_dollars": 0.0,
-      "current_price": 0.45,
-      "exit_condition": {
-        "trigger": "price_target",
-        "price_target": 65,
-        "time_limit": null,
-        "stop_loss": 30
+        "stop_loss": 50
       }
     },
     "will-jd-vance-win-the-2028-republican-presidential-nomination": {
       "status": "open",
       "direction": "NO",
-      "allocation": 120.0,
-      "entry_price": 0.382,
-      "entry_time": "2026-03-14T16:41:01.601481",
+      "allocation": 150.0,
+      "entry_price": 0.3815,
+      "entry_time": "2026-03-14T17:03:56.834250",
       "exit_price": null,
       "exit_time": null,
       "exit_reason": null,
       "pnl_dollars": 0.0,
-      "current_price": 0.382,
+      "current_price": 0.3815,
       "exit_condition": {
         "trigger": "price_target",
-        "price_target": 25,
+        "price_target": 28,
         "time_limit": null,
         "stop_loss": 45
       }
     },
-    "donald-trump-of-truth-social-posts-march-10-march-17-200plus": {
+    "russia-x-ukraine-ceasefire-before-2027": {
       "status": "open",
       "direction": "NO",
       "allocation": 150.0,
-      "entry_price": 0.0255,
-      "entry_time": "2026-03-14T16:41:01.765154",
-      "exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "pnl_dollars": 0.0,
-      "current_price": 0.0255,
-      "exit_condition": {
-        "trigger": "price_target",
-        "price_target": 1.0,
-        "time_limit": null,
-        "stop_loss": 8.0
-      }
-    },
-    "russia-x-ukraine-ceasefire-before-2027": {
-      "status": "open",
-      "direction": "YES",
-      "allocation": 125.0,
       "entry_price": 0.375,
-      "entry_time": "2026-03-14T16:41:02.047107",
+      "entry_time": "2026-03-14T17:03:56.835709",
       "exit_price": null,
       "exit_time": null,
       "exit_reason": null,
@@ -431,24 +285,42 @@
       "current_price": 0.375,
       "exit_condition": {
         "trigger": "price_target",
-        "price_target": 55,
+        "price_target": 25,
         "time_limit": null,
-        "stop_loss": 25
+        "stop_loss": 45
       }
-    }
-  },
-  "grok-3-mini": {
-    "will-jensen-huang-say-anthropic-at-the-nvidia-gtc-keynote": {
+    },
+    "will-the-democratic-party-control-the-senate-after-the-2026-midterm-elections": {
       "status": "open",
       "direction": "NO",
       "allocation": 150.0,
-      "entry_price": 0.305,
-      "entry_time": "2026-03-14T16:41:04.631817",
+      "entry_price": 0.505,
+      "entry_time": "2026-03-14T17:03:57.250917",
       "exit_price": null,
       "exit_time": null,
       "exit_reason": null,
       "pnl_dollars": 0.0,
-      "current_price": 0.305,
+      "current_price": 0.505,
+      "exit_condition": {
+        "trigger": "price_target",
+        "price_target": 40,
+        "time_limit": null,
+        "stop_loss": 58
+      }
+    }
+  },
+  "grok-3-mini": {
+    "will-jd-vance-win-the-2028-republican-presidential-nomination": {
+      "status": "open",
+      "direction": "YES",
+      "allocation": 150.0,
+      "entry_price": 0.3815,
+      "entry_time": "2026-03-14T17:03:59.522139",
+      "exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "pnl_dollars": 0.0,
+      "current_price": 0.3815,
       "exit_condition": {
         "trigger": "to_resolution",
         "price_target": null,
@@ -456,7 +328,25 @@
         "stop_loss": null
       }
     },
-    "donald-trump-of-truth-social-posts-march-10-march-17-200plus": {
+    "netanyahu-out-before-2027-684": {
+      "status": "open",
+      "direction": "YES",
+      "allocation": 100.0,
+      "entry_price": 0.465,
+      "entry_time": "2026-03-14T17:04:01.346197",
+      "exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "pnl_dollars": 0.0,
+      "current_price": 0.465,
+      "exit_condition": {
+        "trigger": "to_resolution",
+        "price_target": null,
+        "time_limit": null,
+        "stop_loss": null
+      }
+    },
+    "will-jensen-huang-say-anthropic-at-the-nvidia-gtc-keynote": {
       "status": "none",
       "direction": "PASS",
       "allocation": 0,
@@ -466,20 +356,20 @@
       "exit_time": null,
       "exit_reason": null,
       "pnl_dollars": 0.0,
-      "current_price": 0.0255,
+      "current_price": 0.295,
       "exit_condition": {}
     },
-    "netanyahu-out-before-2027-684": {
+    "will-the-democratic-party-control-the-senate-after-the-2026-midterm-elections": {
       "status": "open",
       "direction": "YES",
-      "allocation": 150.0,
-      "entry_price": 0.45,
-      "entry_time": "2026-03-14T16:41:05.967020",
+      "allocation": 100.0,
+      "entry_price": 0.505,
+      "entry_time": "2026-03-14T17:04:03.928762",
       "exit_price": null,
       "exit_time": null,
       "exit_reason": null,
       "pnl_dollars": 0.0,
-      "current_price": 0.45,
+      "current_price": 0.505,
       "exit_condition": {
         "trigger": "to_resolution",
         "price_target": null,
@@ -487,17 +377,17 @@
         "stop_loss": null
       }
     },
-    "will-the-democratic-party-control-the-senate-after-the-2026-midterm-elections": {
+    "russia-x-ukraine-ceasefire-before-2027": {
       "status": "open",
-      "direction": "YES",
+      "direction": "NO",
       "allocation": 100.0,
-      "entry_price": 0.505,
-      "entry_time": "2026-03-14T16:41:05.995273",
+      "entry_price": 0.375,
+      "entry_time": "2026-03-14T17:04:04.172270",
       "exit_price": null,
       "exit_time": null,
       "exit_reason": null,
       "pnl_dollars": 0.0,
-      "current_price": 0.505,
+      "current_price": 0.375,
       "exit_condition": {
         "trigger": "to_resolution",
         "price_target": null,
@@ -510,66 +400,12 @@
       "direction": "NO",
       "allocation": 150.0,
       "entry_price": 0.445,
-      "entry_time": "2026-03-14T16:41:07.738634",
+      "entry_time": "2026-03-14T17:04:06.513643",
       "exit_price": null,
       "exit_time": null,
       "exit_reason": null,
       "pnl_dollars": 0.0,
       "current_price": 0.445,
-      "exit_condition": {
-        "trigger": "to_resolution",
-        "price_target": null,
-        "time_limit": null,
-        "stop_loss": null
-      }
-    },
-    "elon-musk-of-tweets-march-13-march-20-40-59": {
-      "status": "open",
-      "direction": "NO",
-      "allocation": 150.0,
-      "entry_price": 0.0005,
-      "entry_time": "2026-03-14T16:41:07.740105",
-      "exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "pnl_dollars": 0.0,
-      "current_price": 0.0005,
-      "exit_condition": {
-        "trigger": "to_resolution",
-        "price_target": null,
-        "time_limit": null,
-        "stop_loss": null
-      }
-    },
-    "will-jd-vance-win-the-2028-republican-presidential-nomination": {
-      "status": "open",
-      "direction": "YES",
-      "allocation": 150.0,
-      "entry_price": 0.382,
-      "entry_time": "2026-03-14T16:41:08.262548",
-      "exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "pnl_dollars": 0.0,
-      "current_price": 0.382,
-      "exit_condition": {
-        "trigger": "stop_loss",
-        "price_target": null,
-        "time_limit": null,
-        "stop_loss": 30.0
-      }
-    },
-    "russia-x-ukraine-ceasefire-before-2027": {
-      "status": "open",
-      "direction": "YES",
-      "allocation": 100.0,
-      "entry_price": 0.375,
-      "entry_time": "2026-03-14T16:41:08.319936",
-      "exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "pnl_dollars": 0.0,
-      "current_price": 0.375,
       "exit_condition": {
         "trigger": "to_resolution",
         "price_target": null,
@@ -579,79 +415,17 @@
     }
   },
   "deepseek-r1": {
-    "will-jensen-huang-say-anthropic-at-the-nvidia-gtc-keynote": {
-      "status": "open",
-      "direction": "NO",
-      "allocation": 150.0,
-      "entry_price": 0.305,
-      "entry_time": "2026-03-14T16:41:11.927075",
-      "exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "pnl_dollars": 0.0,
-      "current_price": 0.305,
-      "exit_condition": {
-        "trigger": "to_resolution",
-        "price_target": null,
-        "time_limit": null,
-        "stop_loss": null
-      }
-    },
-    "will-the-republicans-win-the-2028-us-presidential-election": {
-      "status": "none",
-      "direction": "PASS",
-      "allocation": 0,
-      "entry_price": null,
-      "entry_time": null,
-      "exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "pnl_dollars": 0.0,
-      "current_price": 0.445,
-      "exit_condition": {}
-    },
-    "will-jd-vance-win-the-2028-republican-presidential-nomination": {
-      "status": "open",
-      "direction": "YES",
-      "allocation": 150.0,
-      "entry_price": 0.382,
-      "entry_time": "2026-03-14T16:41:15.937622",
-      "exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "pnl_dollars": 0.0,
-      "current_price": 0.382,
-      "exit_condition": {
-        "trigger": "price_target",
-        "price_target": 50.0,
-        "time_limit": null,
-        "stop_loss": 30.0
-      }
-    },
-    "elon-musk-of-tweets-march-13-march-20-40-59": {
-      "status": "none",
-      "direction": "PASS",
-      "allocation": 0,
-      "entry_price": null,
-      "entry_time": null,
-      "exit_price": null,
-      "exit_time": null,
-      "exit_reason": null,
-      "pnl_dollars": 0.0,
-      "current_price": 0.0005,
-      "exit_condition": {}
-    },
     "netanyahu-out-before-2027-684": {
       "status": "open",
       "direction": "YES",
       "allocation": 150.0,
-      "entry_price": 0.45,
-      "entry_time": "2026-03-14T16:41:27.032502",
+      "entry_price": 0.465,
+      "entry_time": "2026-03-14T17:04:12.052667",
       "exit_price": null,
       "exit_time": null,
       "exit_reason": null,
       "pnl_dollars": 0.0,
-      "current_price": 0.45,
+      "current_price": 0.465,
       "exit_condition": {
         "trigger": "price_target",
         "price_target": 60.0,
@@ -659,18 +433,23 @@
         "stop_loss": null
       }
     },
-    "donald-trump-of-truth-social-posts-march-10-march-17-200plus": {
-      "status": "none",
-      "direction": "PASS",
-      "allocation": 0,
-      "entry_price": null,
-      "entry_time": null,
+    "will-the-republicans-win-the-2028-us-presidential-election": {
+      "status": "open",
+      "direction": "YES",
+      "allocation": 180.0,
+      "entry_price": 0.445,
+      "entry_time": "2026-03-14T17:04:19.040955",
       "exit_price": null,
       "exit_time": null,
       "exit_reason": null,
       "pnl_dollars": 0.0,
-      "current_price": 0.0255,
-      "exit_condition": {}
+      "current_price": 0.445,
+      "exit_condition": {
+        "trigger": "to_resolution",
+        "price_target": null,
+        "time_limit": null,
+        "stop_loss": null
+      }
     },
     "will-the-democratic-party-control-the-senate-after-the-2026-midterm-elections": {
       "status": "none",
@@ -685,12 +464,30 @@
       "current_price": 0.505,
       "exit_condition": {}
     },
+    "will-jensen-huang-say-anthropic-at-the-nvidia-gtc-keynote": {
+      "status": "open",
+      "direction": "NO",
+      "allocation": 150.0,
+      "entry_price": 0.295,
+      "entry_time": "2026-03-14T17:04:26.922188",
+      "exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "pnl_dollars": 0.0,
+      "current_price": 0.295,
+      "exit_condition": {
+        "trigger": "to_resolution",
+        "price_target": null,
+        "time_limit": null,
+        "stop_loss": null
+      }
+    },
     "russia-x-ukraine-ceasefire-before-2027": {
       "status": "open",
-      "direction": "YES",
-      "allocation": 150.0,
+      "direction": "NO",
+      "allocation": 175.0,
       "entry_price": 0.375,
-      "entry_time": "2026-03-14T16:41:43.779451",
+      "entry_time": "2026-03-14T17:04:30.071475",
       "exit_price": null,
       "exit_time": null,
       "exit_reason": null,
@@ -698,7 +495,25 @@
       "current_price": 0.375,
       "exit_condition": {
         "trigger": "price_target",
-        "price_target": 55.0,
+        "price_target": 70.0,
+        "time_limit": null,
+        "stop_loss": 50.0
+      }
+    },
+    "will-jd-vance-win-the-2028-republican-presidential-nomination": {
+      "status": "open",
+      "direction": "YES",
+      "allocation": 200.0,
+      "entry_price": 0.3815,
+      "entry_time": "2026-03-14T17:04:32.035903",
+      "exit_price": null,
+      "exit_time": null,
+      "exit_reason": null,
+      "pnl_dollars": 0.0,
+      "current_price": 0.3815,
+      "exit_condition": {
+        "trigger": "price_target",
+        "price_target": 50.0,
         "time_limit": null,
         "stop_loss": 25.0
       }
